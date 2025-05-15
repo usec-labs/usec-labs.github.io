@@ -39,6 +39,7 @@ We also assume that the eMMC chip has been removed from the board. While in-circ
 - Breakout PCB for eMMC  
 - Dell Precision 3470 laptop  
 - BeagleBone Black single-board computer
+- Hydrabus
 
 ### Useful External links
 - [JEDEC eMMC 5.1 Specification](https://www.jedec.org/document_search?search_api_views_fulltext=jesd84-b51){:target="_blank" rel="noopener"}
@@ -167,5 +168,5 @@ To work with an eMMC, it lets you send raw commands, which is perfect if you're 
 The Python function shown in the last image begins by resetting the eMMC with command CMD0. Reading an RPMB sector then requires sending CMD1, CMD2, CMD3, CMD6, CMD7, CMD8, CMD9, CMD13, CMD18, and CMD23 in the correct sequence while following the RPMB protocol. At one point the eMMC clock must be raised; otherwise, the device will not transition to the next state. When the read completes, the python code parses the raw RPMB packet to isolate the data payload, and displays it with hexdump. A detailed walkthrough of the RPMB protocol is beyond the scope of this post.
 
 ## Instead of conclusion
-The main idea of this brief blog post is to show that eMMC data can be read in several ways, each with its own pros and cons. I began this work because I wanted to explore how the RPMB key might be attacked. Step by step, I found that there is no straightforward way to gain command-level access to eMMC, so I experimented first with the BBB and later with the Hydrabus. I am now convinced that side-channel and fault-analysis evaluations of eMMC can be carried out with the Hydrabus, and I hope to publish a follow-up post soon describing my efforts to extract the RPMB key.
+The main idea of this brief blog post is to show that eMMC data can be read in several ways, each with its own advantages and disadvantages. We began this work as a preparatory step toward investigating whether the RPMB key can be recovered through side-channel or fault attacks. To mount such attacks, the eMMC must be reset and a new sequence of commands that triggers the use of the RPMB key must be issued - requirements that only the HydraBus can satisfy. Consequently, this post lays out the prerequisites for future side-channel and fault attacks on the RPMB, and we plan to publish a follow-up article soon.
 
