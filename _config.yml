@@ -46,9 +46,9 @@ comments:
     input_position: "bottom"
     lang: "en"
     reactions_enabled: "1"
-    theme:
-      light: "light"
-      dark:  "dark_dimmed"
+    # theme:
+    #   light: "light"
+    #   dark:  "dark_dimmed"
 
 github:
   username: usec-labs # change to your GitHub username
